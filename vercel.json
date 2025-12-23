@@ -1,18 +1,39 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
+  "buildCommand": "npm install",
+  "devCommand": "node server.js",
+  "functions": {
+    "api/**/*.js": {
+      "memory": 1024,
+      "maxDuration": 60
+    },
+    "server.js": {
+      "memory": 1024,
+      "maxDuration": 60
     }
-  ],
+  },
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*\\..*)",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "server.js"
+      "dest": "/index.html"
     }
   ],
   "env": {
     "NODE_ENV": "production"
-  }
+  },
+  "ignoreFiles": [
+    "node_modules/**",
+    ".git/**",
+    ".env",
+    "*.db",
+    "*.sqlite3"
+  ]
 }
