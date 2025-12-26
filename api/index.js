@@ -2,10 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import authRoutes from '../backend/routes/auth.js';
-import parkingRoutes from '../backend/routes/parking.js';
-import reservationRoutes from '../backend/routes/reservations.js';
-import userRoutes from '../backend/routes/users.js';
 import { initializeDatabase } from '../backend/database.js';
 
 dotenv.config();
@@ -28,34 +24,7 @@ app.use(cors({
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-// Inicializar base de datos (una sola vez)
-const initDB = async () => {
-    if (dbInitialized || initError || initPromise) {
-        return;
-    }
-    
-    initPromise = (async () => {
-        try {
-            console.log('Iniciando base de datos...');
-            await initializeDatabase();
-            dbInitialized = true;
-            console.log('Base de datos inicializada correctamente');
-        } catch (error) {
-            console.error('Error inicializando base de datos:', error.message);
-            initError = error;
-        }
-    })();
-    
-    await initPromise;
-};
-
-// Middleware de inicialización
-app.use(async (req, res, next) => {
-    await initDB();
-    next();
-});
-
-// Health check endpoint
+// Health check endpoint (ANTES de inicializar rutas)
 app.get('/api/health', (req, res) => {
     const dbTypeEnv = process.env.DB_TYPE || 'no definido';
     const hasDatabaseUrl = !!process.env.DATABASE_URL;
@@ -70,7 +39,6 @@ app.get('/api/health', (req, res) => {
         nodeEnv: process.env.NODE_ENV,
         dbStatus: dbInitialized ? 'connected' : (initError ? 'failed' : 'connecting'),
         error: initError ? initError.message : null,
-        // Info de diagnóstico
         debug: {
             DB_TYPE: dbTypeEnv,
             DATABASE_URL_configured: hasDatabaseUrl,
@@ -80,11 +48,56 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// Rutas API
-app.use('/api/auth', authRoutes);
-app.use('/api/parking', parkingRoutes);
-app.use('/api/reservations', reservationRoutes);
-app.use('/api/users', userRoutes);
+// Inicializar base de datos (una sola vez)
+const initDB = async () => {
+    if (dbInitialized || initError || initPromise) {
+        return;
+    }
+    
+    initPromise = (async () => {
+        try {
+            console.log('Iniciando base de datos...');
+            console.log('DB_TYPE:', process.env.DB_TYPE);
+            console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+            
+            await initializeDatabase();
+            dbInitialized = true;
+            console.log('Base de datos inicializada correctamente');
+        } catch (error) {
+            console.error('Error inicializando base de datos:', error.message);
+            console.error('Error stack:', error.stack);
+            initError = error;
+        }
+    })();
+    
+    await initPromise;
+};
+
+// Middleware de inicialización
+app.use(async (req, res, next) => {
+    await initDB();
+    next();
+});
+
+// Cargar rutas DESPUÉS de intentar inicializar BD
+(async () => {
+    try {
+        const authRoutes = (await import('../backend/routes/auth.js')).default;
+        const parkingRoutes = (await import('../backend/routes/parking.js')).default;
+        const reservationRoutes = (await import('../backend/routes/reservations.js')).default;
+        const userRoutes = (await import('../backend/routes/users.js')).default;
+
+        // Rutas API
+        app.use('/api/auth', authRoutes);
+        app.use('/api/parking', parkingRoutes);
+        app.use('/api/reservations', reservationRoutes);
+        app.use('/api/users', userRoutes);
+        
+        console.log('Rutas cargadas correctamente');
+    } catch (error) {
+        console.error('Error cargando rutas:', error);
+    }
+})();
 
 // Manejo de errores global
 app.use((err, req, res, next) => {
