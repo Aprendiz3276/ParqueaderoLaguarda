@@ -1,0 +1,30 @@
+# 🚨 IMPORTANTE: NECESITAS CONFIGURAR SUPABASE
+
+## Sin Supabase configurado, la app NO funcionará
+
+### Paso 1: Abre https://supabase.com
+- Inicia sesión
+- Selecciona tu proyecto
+
+### Paso 2: Obtén tus credenciales
+- Ve a: Settings → Database → Connection Pooling
+- Copia la URL completa (se ve así):
+  postgresql://postgres:TuContraseña123@db.abcd1234.supabase.co:5432/postgres
+
+### Paso 3: Actualiza este archivo (.env.local)
+Reemplaza:
+- YOUR_PASSWORD → Tu contraseña real
+- YOUR_PROJECT_ID → El ID de tu proyecto (de db.XXXXX.supabase.co)
+
+O mejor aún, copia la URL COMPLETA en DATABASE_URL
+
+### Paso 4: Reinicia el servidor
+npm start
+
+### Paso 5: Prueba login
+http://localhost:3000
+usuario@miparqueo.com / usuario123
+
+---
+
+¿Ya tienes tu DATABASE_URL? Responde con tu URL (sin que pueda ver la contraseña)
