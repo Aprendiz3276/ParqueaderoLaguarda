@@ -1,7 +1,10 @@
 // MiParqueo App - Sistema de Autenticación y Gestión
 // Conectado a API con PostgreSQL/SQLite
 
-const API_URL = 'http://localhost:3000/api';
+// Detectar si estamos en producción (Vercel) o desarrollo local
+const API_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:3000/api'
+    : `${window.location.origin}/api`;
 
 // Estado de la aplicación
 let appState = {
