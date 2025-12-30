@@ -31,6 +31,9 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 // Archivos estáticos
 const staticPath = join(__dirname);
 app.use(express.static(staticPath));
+app.use('/css', express.static(join(__dirname, 'css')));
+app.use('/js', express.static(join(__dirname, 'js')));
+app.use('/data', express.static(join(__dirname, 'data')));
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -51,6 +54,13 @@ app.use('/api/users', userRoutes);
 // Ruta raíz
 app.get('/', (req, res) => {
     res.sendFile(join(__dirname, 'index.html'));
+});
+
+// SPA fallback - servir index.html para rutas no encontradas (excepto API)
+app.get('*', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+        res.sendFile(join(__dirname, 'index.html'));
+    }
 });
 
 // Manejo de errores global

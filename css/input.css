@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos personalizados adicionales */
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-black text-white uppercase tracking-wide border-2 border-black hover:shadow-[4px_4px_0px_0px_#FFD600] transition-all;
+  }
+  
+  .btn-secondary {
+    @apply px-4 py-2 bg-[#FFD600] text-black uppercase tracking-wide border-2 border-black hover:shadow-[4px_4px_0px_0px_black] transition-all;
+  }
+}
