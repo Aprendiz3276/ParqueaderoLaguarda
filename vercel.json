@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm run build-css && npm install || true",
+  "buildCommand": "npm install",
   "public": true,
   "functions": {
-    "api/index.js": {
-      "memory": 1024,
-      "maxDuration": 60
-    },
     "api/vercel.js": {
       "memory": 1024,
       "maxDuration": 60
