@@ -8,6 +8,7 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "setup-db": "node setup-database.js",
+    "build": "npm run build-css",
     "build-css": "tailwindcss -i ./css/input.css -o ./css/styles.css",
     "watch-css": "tailwindcss -i ./css/input.css -o ./css/styles.css --watch"
   },

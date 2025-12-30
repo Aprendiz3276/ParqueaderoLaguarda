@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm install || true",
+  "buildCommand": "npm run build-css && npm install || true",
+  "public": true,
   "functions": {
     "api/index.js": {
       "memory": 1024,
@@ -17,12 +18,20 @@
   },
   "routes": [
     {
+      "src": "/css/(.*)",
+      "dest": "/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/js/$1"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/vercel.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/api/vercel.js"
+      "src": "/.*",
+      "dest": "/index.html"
     }
   ]
 }
