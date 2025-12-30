@@ -68,7 +68,7 @@
         </div>
 
         <!-- Right Side - Form -->
-        <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white">
+        <div class="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-8 bg-white">
             <div class="w-full max-w-md">
                 <div class="mb-8">
                     <div class="inline-block bg-[#FFD600] px-3 py-1 border-2 border-black mb-4">
@@ -136,7 +136,7 @@
                 <div class="mt-8 text-center">
                     <p class="text-gray-600">
                         ¿No tienes cuenta? 
-                        <button type="button" class="text-black hover:text-[#FFD600] transition-colors uppercase tracking-wide text-sm">
+                        <button type="button" id="register-btn" class="text-black hover:text-[#FFD600] transition-colors uppercase tracking-wide text-sm border-b-2 border-transparent hover:border-[#FFD600]">
                             Regístrate
                         </button>
                     </p>
@@ -165,9 +165,9 @@
                         </div>
                     </div>
                     
-                    <div class="flex items-center gap-6">
-                        <button id="user-name" class="text-[#FFD600] hover:text-white transition-colors uppercase text-sm tracking-wide"></button>
-                        <button id="logout-btn-user" class="px-4 py-2 text-sm bg-[#FFD600] text-black border-2 border-black hover:bg-black hover:text-[#FFD600] hover:border-[#FFD600] transition-all duration-200 uppercase tracking-wide">
+                    <div class="flex items-center gap-3 sm:gap-6 flex-wrap">
+                        <button id="user-name" class="text-[#FFD600] hover:text-white transition-colors uppercase text-xs sm:text-sm tracking-wide truncate max-w-[150px] sm:max-w-none"></button>
+                        <button id="logout-btn-user" class="px-3 sm:px-4 py-2 text-xs sm:text-sm bg-[#FFD600] text-black border-2 border-black hover:bg-black hover:text-[#FFD600] hover:border-[#FFD600] transition-all duration-200 uppercase tracking-wide whitespace-nowrap">
                             Cerrar sesión
                         </button>
                     </div>
@@ -176,8 +176,8 @@
         </header>
 
         <!-- Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
                 <!-- Active Reservations Card -->
                 <div class="bg-white border-2 border-black p-6 hover:shadow-[8px_8px_0px_0px_#FFD600]">
                     <div class="flex items-center justify-between mb-4">
@@ -218,11 +218,11 @@
             </div>
 
             <!-- Tabs -->
-            <div class="flex gap-4 mb-8 border-b-2 border-black">
-                <button class="tab-btn active px-6 py-3 text-black uppercase tracking-wide text-sm border-b-4 border-[#FFD600] -mb-0.5" data-tab="reservations">Mis Reservas</button>
-                <button class="tab-btn px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-sm border-b-4 border-transparent -mb-0.5" data-tab="history">Historial</button>
-                <button class="tab-btn px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-sm border-b-4 border-transparent -mb-0.5" data-tab="vehicles">Mis vehículos</button>
-                <button class="tab-btn px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-sm border-b-4 border-transparent -mb-0.5" data-tab="profile">Perfil</button>
+            <div class="flex gap-2 sm:gap-4 mb-8 border-b-2 border-black overflow-x-auto">
+                <button class="tab-btn active px-3 sm:px-6 py-3 text-black uppercase tracking-wide text-xs sm:text-sm border-b-4 border-[#FFD600] -mb-0.5 whitespace-nowrap" data-tab="reservations">Mis Reservas</button>
+                <button class="tab-btn px-3 sm:px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-xs sm:text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="history">Historial</button>
+                <button class="tab-btn px-3 sm:px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-xs sm:text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="vehicles">Mis vehículos</button>
+                <button class="tab-btn px-3 sm:px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-xs sm:text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="profile">Perfil</button>
             </div>
 
             <!-- Tab Content -->
@@ -305,9 +305,9 @@
 
             <div id="vehicles-tab" class="tab-content hidden">
                 <div class="bg-white border-2 border-black p-6">
-                    <div class="flex justify-between items-center mb-6">
+                    <div class="flex justify-between items-center mb-6 flex-col sm:flex-row gap-4">
                         <h3 class="text-2xl uppercase tracking-tight">Mis vehículos</h3>
-                        <button class="px-4 py-2 bg-[#FFD600] text-black border-2 border-black hover:bg-black hover:text-[#FFD600] transition-all duration-200 uppercase tracking-wide text-sm">
+                        <button id="add-vehicle-btn" class="px-4 py-2 bg-[#FFD600] text-black border-2 border-black hover:bg-black hover:text-[#FFD600] transition-all duration-200 uppercase tracking-wide text-sm w-full sm:w-auto">
                             + Agregar vehículo
                         </button>
                     </div>
@@ -400,9 +400,9 @@
                         </div>
                     </div>
                     
-                    <div class="flex items-center gap-6">
-                        <button id="admin-name" class="text-[#FFD600] hover:text-white transition-colors uppercase text-sm tracking-wide"></button>
-                        <button id="logout-btn-admin" class="px-4 py-2 text-sm bg-[#FFD600] text-black border-2 border-black hover:bg-black hover:text-[#FFD600] hover:border-[#FFD600] transition-all duration-200 uppercase tracking-wide">
+                    <div class="flex items-center gap-3 sm:gap-6 flex-wrap">
+                        <button id="admin-name" class="text-[#FFD600] hover:text-white transition-colors uppercase text-xs sm:text-sm tracking-wide truncate max-w-[150px] sm:max-w-none"></button>
+                        <button id="logout-btn-admin" class="px-3 sm:px-4 py-2 text-xs sm:text-sm bg-[#FFD600] text-black border-2 border-black hover:bg-black hover:text-[#FFD600] hover:border-[#FFD600] transition-all duration-200 uppercase tracking-wide whitespace-nowrap">
                             Cerrar sesión
                         </button>
                     </div>
@@ -411,9 +411,9 @@
         </header>
 
         <!-- Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12">
             <!-- Stats -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-12">
                 <div class="bg-white border-2 border-black p-6 hover:shadow-[8px_8px_0px_0px_#FFD600]">
                     <h3 class="text-lg uppercase tracking-wide mb-4">Usuarios totales</h3>
                     <div class="text-4xl font-bold text-[#FFD600] mb-2">1.245</div>
@@ -440,12 +440,12 @@
             </div>
 
             <!-- Tabs -->
-            <div class="flex gap-4 mb-8 border-b-2 border-black overflow-x-auto">
-                <button class="admin-tab-btn active px-6 py-3 text-black uppercase tracking-wide text-sm border-b-4 border-[#FFD600] -mb-0.5 whitespace-nowrap" data-tab="admin-dashboard">Dashboard</button>
-                <button class="admin-tab-btn px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="parking-lots">Parqueaderos</button>
-                <button class="admin-tab-btn px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="users">Usuarios</button>
-                <button class="admin-tab-btn px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="reservations">Reservas</button>
-                <button class="admin-tab-btn px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="reports">Reportes</button>
+            <div class="flex gap-2 sm:gap-4 mb-8 border-b-2 border-black overflow-x-auto">
+                <button class="admin-tab-btn active px-3 sm:px-6 py-3 text-black uppercase tracking-wide text-xs sm:text-sm border-b-4 border-[#FFD600] -mb-0.5 whitespace-nowrap" data-tab="admin-dashboard">Dashboard</button>
+                <button class="admin-tab-btn px-3 sm:px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-xs sm:text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="parking-lots">Parqueaderos</button>
+                <button class="admin-tab-btn px-3 sm:px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-xs sm:text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="users">Usuarios</button>
+                <button class="admin-tab-btn px-3 sm:px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-xs sm:text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="reservations">Reservas</button>
+                <button class="admin-tab-btn px-3 sm:px-6 py-3 text-gray-600 hover:text-black uppercase tracking-wide text-xs sm:text-sm border-b-4 border-transparent -mb-0.5 whitespace-nowrap" data-tab="reports">Reportes</button>
             </div>
 
             <!-- Admin Dashboard Tab -->
@@ -559,7 +559,12 @@
             <!-- Users Tab -->
             <div id="users-tab" class="admin-tab-content hidden">
                 <div class="bg-white border-2 border-black p-6">
-                    <h3 class="text-2xl uppercase tracking-tight mb-6">Gestión de usuarios</h3>
+                    <div class="flex justify-between items-center mb-6 flex-col sm:flex-row gap-4">
+                        <h3 class="text-2xl uppercase tracking-tight">Gestión de usuarios</h3>
+                        <button id="add-user-btn" class="px-4 py-2 bg-[#FFD600] text-black border-2 border-black hover:bg-black hover:text-[#FFD600] transition-all duration-200 uppercase tracking-wide text-sm w-full sm:w-auto">
+                            + Registrar nuevo usuario
+                        </button>
+                    </div>
                     <div class="overflow-x-auto">
                         <table class="w-full">
                             <thead class="border-b-2 border-black bg-gray-50">
