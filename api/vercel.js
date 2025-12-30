@@ -36,6 +36,10 @@ try {
     console.error('Error inicializando base de datos:', err.message);
 }
 
+// Archivos estáticos PRIMERO (antes de cualquier ruta)
+const staticPath = join(__dirname, '..');
+app.use(express.static(staticPath));
+
 // Health check
 app.get('/api/health', (req, res) => {
     res.status(200).json({ 
@@ -68,11 +72,7 @@ app.get('/api/users/:userId/vehicles', userRoutes.getVehicles);
 app.post('/api/users/:userId/vehicles', userRoutes.addVehicle);
 app.delete('/api/users/:vehicleId', userRoutes.deleteVehicle);
 
-// Archivos estáticos
-const staticPath = join(__dirname, '..');
-app.use(express.static(staticPath));
-
-// SPA fallback
+// SPA fallback - DEBE SER EL ÚLTIMO
 app.get('*', (req, res) => {
     res.sendFile(join(staticPath, 'index.html'));
 });
