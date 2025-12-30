@@ -26,15 +26,15 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoding({ limit: '50mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // Inicializar base de datos
 await initializeDatabase();
 
 // Health check
 app.get('/api/health', (req, res) => {
-    res.status(200).json({ 
-        status: 'ok', 
+    res.status(200).json({
+        status: 'ok',
         message: 'Servidor funcionando',
         timestamp: new Date().toISOString(),
         nodeEnv: process.env.NODE_ENV,
