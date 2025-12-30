@@ -1,6 +1,16 @@
 {
   "version": 2,
-  "buildCommand": "npm run setup-db || true",
+  "buildCommand": "npm install || true",
+  "functions": {
+    "api/index.js": {
+      "memory": 1024,
+      "maxDuration": 60
+    },
+    "api/vercel.js": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  },
   "env": {
     "DB_TYPE": "postgresql",
     "NODE_ENV": "production"
@@ -8,11 +18,11 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "/api/vercel.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/api/vercel.js"
     }
   ]
 }
